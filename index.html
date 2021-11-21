@@ -1,0 +1,178 @@
+<html>
+  <head>
+      <TITLE>Sudha</TITLE>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <style>
+      .h{
+        padding:30px;
+      }
+      
+      
+      .container{
+  text-align:center;
+
+}
+input[type=text], select {
+  width: 40%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type=submit] {
+  width: 40%;
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.list{
+  text-align:center;
+  box-sizing: border-box;
+  width:40%;
+  margin-left:30%;
+ 
+}
+li{
+  padding:10px;
+  margin-top:10px;
+  list-style:none;
+  box-shadow:0 1px 1px 1px rgb(0,0,0,0.4);
+}
+i{
+  position:absolute;
+  left:65%;
+}
+i:nth-child(even)
+{
+  position:absolute;
+  left:68%;
+}
+      
+      </style>
+    
+  
+  </head>
+  
+  <body>
+    
+    <div class="container">
+      <h1 class="h">TO DO LIST</h1>
+  <input id="todo" type="text" value=""><br>
+    <input onclick="addtodo()" type="submit" value="Submit"><br>
+
+  </input>
+</div>
+<div class="list" id="list">
+  
+</div>
+<div class="container">
+        <input onclick="cls()" type="submit" value="Clear">
+</div>
+  
+  
+  
+  
+  
+  <script>
+
+    window.addEventListener('load', (event) => {
+  alert('You can delete and update by clicking the Icon');
+});
+    
+    var arr =[];
+let id=0;
+
+var list=document.getElementById("list");
+
+function addtodo() 
+{
+  let ans=document.getElementById("todo").value;
+   if(ans.length != 0)
+     {
+   arr.push(ans);
+  document.getElementById("todo").value="";
+  updateele();
+     }
+}
+
+function updateele()
+{
+  let bdy=document.getElementById("list");
+  bdy.textContent='';
+  for(let i=0; i<arr.length; i++)
+    {
+      bdy.appendChild(putinto(arr[i]));
+    }
+  
+}
+function putinto(value)
+{
+  let li=document.createElement("li");
+  li.textContent=value;
+
+  li.appendChild(d(value));
+  li.appendChild(upd(value));
+  
+  return li;
+}
+
+function d(value)
+{
+  let icn=document.createElement("i");
+  icn.className="fas fa-trash";
+  icn.onclick = function()
+  {
+  arr = arr.filter(word => (word!=value));
+  updateele();
+  }
+  return icn;
+ 
+}
+function upd(value)
+{
+  let icn=document.createElement("i");
+  icn.className="fas fa-pen";
+  icn.onclick=function ()
+  {
+  arr = arr.filter(word => (word!=value));
+  updateele();
+  document.getElementById("todo").value=value;
+   
+  }
+  return icn;
+}
+
+function cls()
+{
+  arr=[];
+  updateele();
+}
+
+
+ document.getElementById("todo").addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {  
+        let ans=document.getElementById("todo").value;
+if(ans.length != 0)
+  {
+      arr.push(ans);
+  document.getElementById("todo").value="";
+  updateele();
+  }
+    }
+  });
+
+
+    
+    
+  </script>
+
+  </body>
+  
+  </html>
